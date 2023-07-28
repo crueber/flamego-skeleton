@@ -1,0 +1,19 @@
+{{template "include/header"}}
+
+<p>
+  Peeps:
+  <ul>
+    {{range .Users}}
+    <li>{{.ID}}: <a href="/user/{{.ID}}">{{.Name}}</a> at {{.Email}}</li>
+    {{end}}
+  </ul>
+</p>
+
+<form method="post" action="/user">
+  <input name="name" type="text" placeholder="name" />
+  <input name="email" type="text" placeholder="email" />
+  <input type="submit" />
+</form>
+
+{{template "include/footer"}}
+
