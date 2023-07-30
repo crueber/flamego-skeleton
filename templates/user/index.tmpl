@@ -3,8 +3,8 @@
 <p>
   Peeps:
   <ul>
-    {{range $i, $user := .Users}}
-    {{template "user/partial-user" $user}}
+    {{range .Users}}
+    {{template "user/partial-user" .}}
     {{end}}
   </ul>
 </p>
