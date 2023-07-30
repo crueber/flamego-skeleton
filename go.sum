@@ -11,12 +11,12 @@ github.com/charmbracelet/log v0.2.2/go.mod h1:Zs11hKpb8l+UyX4y1srwZIGW+MPCXJHIty
 github.com/davecgh/go-spew v1.1.0/go.mod h1:J7Y8YcW2NihsgmVo/mv3lAwl/skON4iLHjSsI+c5H38=
 github.com/davecgh/go-spew v1.1.1 h1:vj9j/u1bqnvCEfJOwUhtlOARqs3+rkHYY13jYWTU97c=
 github.com/davecgh/go-spew v1.1.1/go.mod h1:J7Y8YcW2NihsgmVo/mv3lAwl/skON4iLHjSsI+c5H38=
+github.com/dustin/go-humanize v1.0.1 h1:GzkhY7T5VNhEkwH0PVJgjz+fX1rhBrR7pRT3mDkpeCY=
+github.com/dustin/go-humanize v1.0.1/go.mod h1:Mu1zIs6XwVuF/gI1OepvI0qD18qycQx+mFykh5fBlto=
 github.com/flamego/binding v1.3.0 h1:CPbnSuP0SxT50JR7lK2khTjcQi1oOECqRK7kbOYw91U=
 github.com/flamego/binding v1.3.0/go.mod h1:xgm6FEpEKKkF8CQilK2X3MJ5kTjOTnYdz/ooFctDTdc=
 github.com/flamego/flamego v1.9.1 h1:JplX2eFB/CM8VHuZG6m6sHQhcBdOMhGnZFbPCxtN9ao=
 github.com/flamego/flamego v1.9.1/go.mod h1:WjaZO8GM/EGvIIGXlOiwp3oPuyy1fAdjWqEgEJWovJo=
-github.com/flamego/gzip v1.2.0 h1:LRNHcLCFZnRTKLpDXUm3nfCjVk4+Qi5nWaXC6JdSXTA=
-github.com/flamego/gzip v1.2.0/go.mod h1:y0XniLyIOf0/z5WTmPgyWw1SUYMqypqYxdKk5j7KDDE=
 github.com/flamego/session v1.3.0 h1:mj+fyNnJeM9aNXx2CGKppH5VFFUVHNEkhjObJIVH9hY=
 github.com/flamego/session v1.3.0/go.mod h1:x4oNtRuWDnaA2uRylTm3kShbCI3lTWM+dUHuJyeeiZE=
 github.com/flamego/template v1.2.2 h1:aMpt8RzXBb2ZGuABf9p/q8oBBpXrurUV8rgBbz7mj2o=

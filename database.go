@@ -13,7 +13,9 @@ func OpenDatabase() *gorm.DB {
     panic("Unable to open sqlite db: test.db")
   }
 
-  db.AutoMigrate(&m.User{})
+  db.AutoMigrate(
+    &m.User{},
+  )
 
   return db
 }

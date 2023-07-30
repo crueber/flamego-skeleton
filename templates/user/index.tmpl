@@ -1,0 +1,16 @@
+{{template "include/header"}}
+
+<p>
+  Peeps:
+  <ul>
+    {{range $i, $user := .Users}}
+    {{template "user/partial-user" $user}}
+    {{end}}
+  </ul>
+</p>
+
+<p>Create new user:</p>
+{{template "user/partial-form"}}
+
+{{template "include/footer"}}
+

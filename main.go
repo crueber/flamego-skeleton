@@ -1,6 +1,8 @@
 package main
 
 import (
+  t "html/template"
+
   "github.com/flamego/flamego"
   "github.com/flamego/template"
   "github.com/flamego/binding"
@@ -20,7 +22,7 @@ func main() {
   f.Use(flamego.Logger())
   f.Use(flamego.Recovery())
   f.Use(flamego.Static(flamego.StaticOptions{Directory: "public"}))
-  f.Use(template.Templater(template.Options{ FileSystem: fs, }))
+  f.Use(template.Templater(template.Options{ FuncMaps: []t.FuncMap{ Helpers() }, FileSystem: fs, }))
   f.Use(session.Sessioner())
 
   f.Post("/user", binding.Form(m.User{}), r.UserCreate)

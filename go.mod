@@ -3,9 +3,9 @@ module fgo-test
 go 1.20
 
 require (
+	github.com/dustin/go-humanize v1.0.1
 	github.com/flamego/binding v1.3.0
 	github.com/flamego/flamego v1.9.1
-	github.com/flamego/gzip v1.2.0
 	github.com/flamego/session v1.3.0
 	github.com/flamego/template v1.2.2
 	github.com/flamego/validator v1.0.0

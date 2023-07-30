@@ -1,0 +1,18 @@
+{{template "include/header"}}
+
+<p>
+  <a href="/users">All Peeps</a>
+</p>
+
+<p>
+  Peep:
+  <ul>{{template "user/partial-user" .User}}</ul>
+</p>
+
+<p>Update:</p>
+{{template "user/partial-form" .User}}
+
+<a href="/user/{{.User.ID}}/delete">DELETE ME</a>
+
+{{template "include/footer"}}
+

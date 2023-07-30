@@ -1,0 +1,5 @@
+<li>
+  {{.ID}}: 
+  <a href="/user/{{.ID}}">{{.Name}}</a>
+  at {{.Email}}
+  (created {{ RelativeTime .CreatedAt }} :: {{ DateOnly .CreatedAt }})</li>

@@ -1,0 +1,9 @@
+
+<p>
+  <form method="post" action="/user{{if .ID}}/{{.ID}}{{end}}">
+    <input name="name" type="text" placeholder="name"{{if .Name}} value="{{.Name}}"{{end}} />
+    <input name="email" type="text" placeholder="email"{{if .Email}} value="{{.Email}}"{{end}} />
+    <input type="submit" />
+  </form>
+</p>
+
