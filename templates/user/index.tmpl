@@ -1,12 +1,14 @@
 {{template "include/header"}}
 
 <p>
-  Peeps:
-  <ul>
+  Peeps:<br/><br/>
+  <table>
+  <tbody>
     {{range .Users}}
     {{template "user/partial-user" .}}
     {{end}}
-  </ul>
+  </tbody>
+  </table>
 </p>
 
 <p>Create new user:</p>
