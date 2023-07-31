@@ -1,19 +1,16 @@
 {{template "include/header"}}
 
-<p>
-  <a href="/users">All Peeps</a>
-</p>
+<h3>Peep</h3>
 
 <p>
-  Peep:
-  <table>
+  <table class="table table-sm">
   <tbody>
   {{template "user/partial-user" .User}}
   </tbody>
   </table>
 </p>
 
-<p>Update:</p>
+<h3>Update</h3>
 {{template "user/partial-form" .User}}
 <p><a href="/user/{{.User.ID}}/delete">DELETE ME</a></p>
 

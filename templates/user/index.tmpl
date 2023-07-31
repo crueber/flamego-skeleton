@@ -1,8 +1,8 @@
 {{template "include/header"}}
 
+<h3>Peeps</h3>
 <p>
-  Peeps:<br/><br/>
-  <table>
+  <table class="table table-sm">
   <tbody>
     {{range .Users}}
     {{template "user/partial-user" .}}
@@ -11,7 +11,7 @@
   </table>
 </p>
 
-<p>Create new user:</p>
+<h3>Create new user:</h3>
 {{template "user/partial-form"}}
 
 {{template "include/footer"}}

@@ -25,6 +25,7 @@ func main() {
   f.Use(template.Templater(template.Options{ FuncMaps: []t.FuncMap{ Helpers() }, FileSystem: fs, }))
   f.Use(session.Sessioner())
 
+  f.Get("/", func(c flamego.Context) { c.Redirect("/users", 301) })
   f.Post("/user", binding.Form(m.User{}), r.UserCreate)
   f.Post("/user/{id}", binding.Form(m.User{}), r.UserUpdate)
   f.Get("/users", r.UserIndex)
