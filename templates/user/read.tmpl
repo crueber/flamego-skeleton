@@ -1,4 +1,4 @@
-{{template "include/header"}}
+{{template "include/header" .}}
 
 <h3>Peep</h3>
 
@@ -14,5 +14,5 @@
 {{template "user/partial-form" .User}}
 <p><a href="/user/{{.User.ID}}/delete">DELETE ME</a></p>
 
-{{template "include/footer"}}
+{{template "include/footer" .}}
 

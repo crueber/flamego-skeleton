@@ -9,9 +9,10 @@ import (
 
 func HXBoosted(c flamego.Context, d template.Data) {
   boosted := c.Request().Request.Header.Get("HX-Boosted")
-  fmt.Println("%s", c.Request().Request.Header.Get("HX-Boosted"))
+  d["Boosted"] = ""
   if boosted != "" {
-    d["Boosted"] = true
+    d["Boosted"] = "boosted"
+    fmt.Println("Upgrading request to hx-boosted response.")
   }
 }
 
