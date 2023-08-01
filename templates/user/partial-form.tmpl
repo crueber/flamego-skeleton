@@ -1,15 +1,13 @@
 
-<p>
-  <form method="post" 
-        {{if .ID}}
-        action="/user/{{.ID}}" hx-target="#user" hx-swap="innerHTML"
-        {{else}}
-        action="/user" hx-target="#userlist" hx-swap="beforeend"
-        {{end}}
-      >
-    <input name="name" type="text" placeholder="name"{{if .Name}} value="{{.Name}}"{{end}} />
-    <input name="email" type="text" placeholder="email"{{if .Email}} value="{{.Email}}"{{end}} />
-    <input type="submit" />
-  </form>
-</p>
+<form id="userform" method="post" 
+      {{if .ID}}
+      action="/user/{{.ID}}" hx-target="#user" hx-swap="innerHTML"
+      {{else}}
+      action="/user" hx-post="/user" hx-target="#userlist"  hx-swap="beforeend" hx-on::after-request="this.reset(); this.children[0].focus()"
+      {{end}}
+    >
+  <input name="name" type="text" placeholder="name"{{if .Name}} value="{{.Name}}"{{end}} />
+  <input name="email" type="text" placeholder="email"{{if .Email}} value="{{.Email}}"{{end}} />
+  <input type="submit" />
+</form>
 

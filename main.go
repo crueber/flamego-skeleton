@@ -31,7 +31,9 @@ func main() {
   f.Post("/user/{id}", binding.Form(m.User{}), r.UserUpdate)
   f.Get("/users", r.UserIndex)
   f.Get("/user/{id}", r.UserRead)
-  f.Get("/user/{id}/delete", r.UserDelete)
+  f.Delete("/user/{id}", r.UserDelete)
+  f.Get("/user/{id}/delete", r.UserDeleteRedirect)
+
 
   f.Run()
 }

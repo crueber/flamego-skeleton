@@ -50,6 +50,14 @@ func UserCreate(c flamego.Context, t template.Template, d template.Data, user m.
 func UserDelete(c flamego.Context, db *gorm.DB) {
   user := m.GetUser(db, c.ParamInt("id"))
   user.Delete(db)
+  w := c.ResponseWriter()
+  w.WriteHeader(http.StatusOK)
+  w.Write([]byte{})
+}
+
+func UserDeleteRedirect(c flamego.Context, db *gorm.DB) {
+  user := m.GetUser(db, c.ParamInt("id"))
+  user.Delete(db)
   c.Redirect("/users", http.StatusFound)
 }
 

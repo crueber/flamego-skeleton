@@ -4,11 +4,14 @@
   <title>Skeleton with Users</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
    <script src="https://unpkg.com/htmx.org@1.9.4"></script>
+   <style>
+      button.delete-btn { --bs-btn-padding-y: 0rem; }
+   </style>
 </head>
 <body class="bg-dark" hx-boost="true">
 {{end}}
 
-<div class="container bg-light" style="height: 100%">
+<div class="container bg-light" style="padding-bottom: 5rem;">
 
   <nav class="navbar bg-dark navbar-expand-lg border-bottom border-body" data-bs-theme="dark">
     <div class="container-fluid">

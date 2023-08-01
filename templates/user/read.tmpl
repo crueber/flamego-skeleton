@@ -12,7 +12,10 @@
 
 <h3>Update</h3>
 {{template "user/partial-form" .User}}
-<p><a href="/user/{{.User.ID}}/delete">DELETE ME</a></p>
+<a class="btn btn-outline-danger" href="/user/{{.User.ID}}/delete">Delete User</a>
 
+<style>
+  td.delete { visibility: hidden; }
+</style>
 {{template "include/footer" .}}
 
