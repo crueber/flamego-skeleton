@@ -3,7 +3,7 @@
 <h3>Peeps</h3>
 <p>
   <table class="table table-sm">
-  <tbody>
+  <tbody id="userlist">
     {{range .Users}}
     {{template "user/partial-user" .}}
     {{end}}

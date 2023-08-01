@@ -1,7 +1,7 @@
 package routes
 
 import (
-  "fmt"
+  // "fmt"
   "net/http"
 
   "github.com/flamego/flamego"
@@ -22,7 +22,7 @@ func UserRead(c flamego.Context, t template.Template, d template.Data, db *gorm.
   t.HTML(http.StatusOK, "user/read")
 }
 
-func UserUpdate(c flamego.Context, userUpdates m.User, db *gorm.DB, errs binding.Errors) {
+func UserUpdate(c flamego.Context, t template.Template, d template.Data, userUpdates m.User, db *gorm.DB, errs binding.Errors) {
   if len(errs) > 0 {
     validationError(c, errs)
     return
@@ -31,16 +31,20 @@ func UserUpdate(c flamego.Context, userUpdates m.User, db *gorm.DB, errs binding
   user.Name = userUpdates.Name
   user.Email = userUpdates.Email
   user.Save(db)
-  c.Redirect(fmt.Sprintf("%s%d", "/user/", user.ID), http.StatusFound)
+  d["User"] = user
+  t.HTML(http.StatusOK, "user/partial")
+  // c.Redirect(fmt.Sprintf("%s%d", "/user/", user.ID), http.StatusFound)
 }
 
-func UserCreate(c flamego.Context, user m.User, db *gorm.DB, errs binding.Errors) {
+func UserCreate(c flamego.Context, t template.Template, d template.Data, user m.User, db *gorm.DB, errs binding.Errors) {
   if len(errs) > 0 {
     validationError(c, errs)
     return
   }
   user.Save(db)
-  c.Redirect(fmt.Sprintf("%s%d", "/user/", user.ID), http.StatusFound)
+  d["User"] = user
+  t.HTML(http.StatusOK, "user/partial")
+  // c.Redirect(fmt.Sprintf("%s%d", "/user/", user.ID), http.StatusFound)
 }
 
 func UserDelete(c flamego.Context, db *gorm.DB) {
