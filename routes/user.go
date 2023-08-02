@@ -1,7 +1,7 @@
 package routes
 
 import (
-  // "fmt"
+  "fmt"
   "net/http"
 
   "github.com/flamego/flamego"
@@ -32,8 +32,11 @@ func UserUpdate(c flamego.Context, t template.Template, d template.Data, userUpd
   user.Email = userUpdates.Email
   user.Save(db)
   d["User"] = user
-  t.HTML(http.StatusOK, "user/partial")
-  // c.Redirect(fmt.Sprintf("%s%d", "/user/", user.ID), http.StatusFound)
+  if c.Request().Method == http.MethodPut {
+    t.HTML(http.StatusOK, "user/partial")
+  } else {
+    c.Redirect(fmt.Sprintf("%s%d", "/user/", user.ID), http.StatusFound)
+  }
 }
 
 func UserCreate(c flamego.Context, t template.Template, d template.Data, user m.User, db *gorm.DB, errs binding.Errors) {
@@ -50,14 +53,12 @@ func UserCreate(c flamego.Context, t template.Template, d template.Data, user m.
 func UserDelete(c flamego.Context, db *gorm.DB) {
   user := m.GetUser(db, c.ParamInt("id"))
   user.Delete(db)
-  w := c.ResponseWriter()
-  w.WriteHeader(http.StatusOK)
-  w.Write([]byte{})
-}
-
-func UserDeleteRedirect(c flamego.Context, db *gorm.DB) {
-  user := m.GetUser(db, c.ParamInt("id"))
-  user.Delete(db)
-  c.Redirect("/users", http.StatusFound)
+  if c.Request().Method == http.MethodGet {
+    c.Redirect("/users", http.StatusFound)
+  } else {
+    w := c.ResponseWriter()
+    w.WriteHeader(http.StatusOK)
+    w.Write([]byte{})
+  }
 }
 

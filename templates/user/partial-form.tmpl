@@ -1,7 +1,7 @@
 
-<form id="userform" method="post" 
+<form id="userform" 
       {{if .ID}}
-      action="/user/{{.ID}}" hx-target="#user" hx-swap="innerHTML"
+      action="/user/{{.ID}}" hx-put="/user/{{.ID}}" hx-target="#user" hx-swap="innerHTML"
       {{else}}
       action="/user" hx-post="/user" hx-target="#userlist"  hx-swap="beforeend" hx-on::after-request="this.reset(); this.children[0].focus()"
       {{end}}

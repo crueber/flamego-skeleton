@@ -28,11 +28,12 @@ func main() {
 
   f.Get("/", func(c flamego.Context) { c.Redirect("/users", 301) })
   f.Post("/user", binding.Form(m.User{}), r.UserCreate)
+  f.Put("/user/{id}", binding.Form(m.User{}), r.UserUpdate)
   f.Post("/user/{id}", binding.Form(m.User{}), r.UserUpdate)
   f.Get("/users", r.UserIndex)
   f.Get("/user/{id}", r.UserRead)
   f.Delete("/user/{id}", r.UserDelete)
-  f.Get("/user/{id}/delete", r.UserDeleteRedirect)
+  f.Get("/user/{id}/delete", r.UserDelete)
 
 
   f.Run()
