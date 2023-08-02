@@ -35,7 +35,6 @@ func main() {
   f.Delete("/user/{id}", r.UserDelete)
   f.Get("/user/{id}/delete", r.UserDelete)
 
-
   f.Run()
 }
 

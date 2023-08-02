@@ -1,10 +1,10 @@
-<tr id="user{{.ID}}">
+<tr id="user{{.ID}}" class="fadeout">
   <td>{{.ID}}</td>
   <td><a href="/user/{{.ID}}">{{.Name}}</a></td>
   <td>{{.Email}}</td>
   <td>created {{ RelativeTime .CreatedAt }}</td>
   <td>{{ DateOnly .CreatedAt }}</td>
   <td class="delete">
-    <button class="btn btn-outline-danger btn-sm delete-btn" hx-delete="/user/{{.ID}}" hx-target="#user{{.ID}}" hx-swap="delete">Delete</button>
+    <button class="btn btn-outline-danger btn-sm delete-btn" hx-delete="/user/{{.ID}}" hx-target="#user{{.ID}}" hx-swap="delete swap:0.4s">Delete</button>
   </td>
 </tr>
