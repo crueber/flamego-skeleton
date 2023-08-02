@@ -23,7 +23,7 @@ func (u *User) Delete(db *gorm.DB) error {
 
 func ListAllUsers(db *gorm.DB) []User {
   var users []User
-  db.Find(&users)
+  db.Order("id desc").Find(&users)
   return users
 }
 

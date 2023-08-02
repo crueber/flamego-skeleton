@@ -1,18 +1,20 @@
 {{template "include/header" .}}
 
+<h3>Create new user:</h3>
+{{template "user/partial-form"}}
+
 <h3>Peeps</h3>
 <p>
   <table class="table table-sm">
   <tbody id="userlist">
-    {{range .Users}}
-    {{template "user/partial-user" .}}
+    {{if len .Users}}
+      {{range .Users}}
+      {{template "user/partial-user" .}}
+      {{end}}
     {{end}}
   </tbody>
   </table>
 </p>
-
-<h3>Create new user:</h3>
-{{template "user/partial-form"}}
 
 {{template "include/footer" .}}
 

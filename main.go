@@ -23,6 +23,7 @@ func main() {
   f.Use(flamego.Recovery())
   f.Use(flamego.Static(flamego.StaticOptions{Directory: "public"}))
   f.Use(template.Templater(template.Options{ FuncMaps: []t.FuncMap{ Helpers() }, FileSystem: fs, }))
+  f.Use(flamego.Renderer(flamego.RenderOptions{ JSONIndent: "  ", }))
   f.Use(HXBoosted)
   f.Use(session.Sessioner())
 

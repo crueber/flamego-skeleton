@@ -33,7 +33,7 @@ func UserUpdate(c flamego.Context, t template.Template, d template.Data, userUpd
   user.Save(db)
   d["User"] = user
   if c.Request().Method == http.MethodPut {
-    t.HTML(http.StatusOK, "user/partial")
+    t.HTML(http.StatusAccepted, "user/partial")
   } else {
     c.Redirect(fmt.Sprintf("%s%d", "/user/", user.ID), http.StatusFound)
   }
@@ -46,7 +46,7 @@ func UserCreate(c flamego.Context, t template.Template, d template.Data, user m.
   }
   user.Save(db)
   d["User"] = user
-  t.HTML(http.StatusOK, "user/partial")
+  t.HTML(http.StatusCreated, "user/partial")
   // c.Redirect(fmt.Sprintf("%s%d", "/user/", user.ID), http.StatusFound)
 }
 
