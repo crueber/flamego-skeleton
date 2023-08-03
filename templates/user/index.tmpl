@@ -1,7 +1,7 @@
 {{template "include/header" .}}
 
 <h3>Create new user:</h3>
-{{template "user/partial-form"}}
+{{template "user/fragment-form"}}
 
 <h3>Peeps</h3>
 <p>
@@ -9,7 +9,7 @@
   <tbody id="userlist">
     {{if len .Users}}
       {{range .Users}}
-      {{template "user/partial-user" .}}
+      {{template "user/fragment-row" .}}
       {{end}}
     {{end}}
   </tbody>
