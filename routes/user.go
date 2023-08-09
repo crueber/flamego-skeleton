@@ -13,12 +13,12 @@ import (
 )
 
 func UserIndex(c flamego.Context, t template.Template, d template.Data, db *gorm.DB) {
-	d["Users"] = m.ListAllUsers(db)
+	d["Users"] = m.ListAll[m.User](db)
 	t.HTML(http.StatusOK, "user/index")
 }
 
 func UserRead(c flamego.Context, t template.Template, d template.Data, db *gorm.DB) {
-	d["User"] = m.GetUser(db, c.ParamInt("id"))
+	d["User"] = m.Get[m.User](c.ParamInt("id"), db)
 	t.HTML(http.StatusOK, "user/read")
 }
 
@@ -27,10 +27,10 @@ func UserUpdate(c flamego.Context, t template.Template, d template.Data, userUpd
 		validationError(c, errs)
 		return
 	}
-	user := m.GetUser(db, c.ParamInt("id"))
+	user := m.Get[m.User](c.ParamInt("id"), db)
 	user.Name = userUpdates.Name
 	user.Email = userUpdates.Email
-	user.Save(db)
+	m.Save(user, db)
 	d["User"] = user
 	if c.Request().Method == http.MethodPut {
 		t.HTML(http.StatusAccepted, "user/partial")
@@ -44,15 +44,15 @@ func UserCreate(c flamego.Context, t template.Template, d template.Data, user m.
 		validationError(c, errs)
 		return
 	}
-	user.Save(db)
+	m.Save(user, db)
 	d["User"] = user
 	t.HTML(http.StatusCreated, "user/partial")
 	// c.Redirect(fmt.Sprintf("%s%d", "/user/", user.ID), http.StatusFound)
 }
 
 func UserDelete(c flamego.Context, db *gorm.DB) {
-	user := m.GetUser(db, c.ParamInt("id"))
-	user.Delete(db)
+	user := m.Get[m.User](c.ParamInt("id"), db)
+	m.Delete(user, db)
 	if c.Request().Method == http.MethodGet {
 		c.Redirect("/users", http.StatusFound)
 	} else {
