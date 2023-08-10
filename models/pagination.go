@@ -1,5 +1,10 @@
 package models
 
+import (
+	"gorm.io/gorm"
+)
+
+type Search func(string) func(*gorm.DB) *gorm.DB
 type Pagination struct {
 	TotalPages  int64
 	CurrentPage int64
@@ -7,6 +12,19 @@ type Pagination struct {
 	URI         string
 	PrevPage    int64
 	NextPage    int64
+	Search      string
+	SearchFn    Search
+}
+
+func SetPagination(page int64, per int, search string, fn func(string) func(*gorm.DB) *gorm.DB, uri string) Pagination {
+	if page == 0 {
+		page = 1
+	}
+	if per == 0 {
+		per = 5
+	}
+
+	return Pagination{0, page, per, uri, 0, 0, search, fn}
 }
 
 func (p *Pagination) Offset() int {
@@ -27,15 +45,4 @@ func (p *Pagination) SetTotal(count int64) {
 	} else {
 		p.NextPage = 0
 	}
-}
-
-func SetPagination(page int64, per int, uri string) Pagination {
-	if page == 0 {
-		page = 1
-	}
-	if per == 0 {
-		per = 5
-	}
-
-	return Pagination{0, page, per, uri, 0, 0}
 }

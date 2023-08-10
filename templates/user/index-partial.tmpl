@@ -6,14 +6,14 @@
 
     <tr><td colspan="100" class="text-center border-bottom-0" >
         {{if .Pagination.NextPage}}
-        <div hx-get="{{.Pagination.URI}}?page={{.Pagination.NextPage}}" 
+        <div hx-get="{{BuildURI .Pagination}}" 
              hx-target="closest tr" 
              hx-swap="outerHTML" 
              hx-trigger="revealed">Loading...</div>
         {{else}}
-        End of list.
+        No more results.
         {{end}}
     </td></tr>
 {{else}}
-<tr><td colspan="100" class="text-center border-bottom-0">No users found.</td></tr>
+    <tr><td colspan="100" class="text-center border-bottom-0">No users found.</td></tr>
 {{end}}

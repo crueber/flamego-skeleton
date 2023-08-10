@@ -12,14 +12,24 @@ import (
 	m "fgo-test/models"
 )
 
+func UserSearchScope(search string) func(db *gorm.DB) *gorm.DB {
+	return func(db *gorm.DB) *gorm.DB {
+		if search != "" {
+			return db.Where("name LIKE ?", "%"+search+"%").Or("email LIKE ?", "%"+search+"%")
+		} else {
+			return db
+		}
+	}
+}
+
 func UserIndex(c flamego.Context, t template.Template, d template.Data, db *gorm.DB) {
-	paging := m.SetPagination(c.QueryInt64("page"), c.QueryInt("perpage"), "/users")
+	paging := m.SetPagination(c.QueryInt64("page"), c.QueryInt("perpage"), c.QueryTrim("search"), UserSearchScope, "/users")
 	d["Users"], d["Pagination"] = m.PaginatedList[m.User](paging, db)
 	t.HTML(http.StatusOK, "user/index")
 }
 
 func UserIndexPartial(c flamego.Context, t template.Template, d template.Data, db *gorm.DB) {
-	paging := m.SetPagination(c.QueryInt64("page"), c.QueryInt("perpage"), "/users.partial")
+	paging := m.SetPagination(c.QueryInt64("page"), c.QueryInt("perpage"), c.QueryTrim("search"), UserSearchScope, "/users.partial")
 	d["Users"], d["Pagination"] = m.PaginatedList[m.User](paging, db)
 	t.HTML(http.StatusOK, "user/index-partial")
 }

@@ -4,6 +4,10 @@
 {{template "user/fragment-form"}}
 
 <h3>Peeps</h3>
+<form>
+  <input name="page" value="1" type="hidden" />
+  <input name="search" hx-get="/users.partial" hx-trigger="keyup changed delay:.5s" hx-target="#userlist" />
+</form>
 <p>
   <table class="table table-sm">
     <tbody id="userlist">
