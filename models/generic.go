@@ -18,8 +18,8 @@ func Get[M Model](id int, db *gorm.DB) M {
 	return hydrated
 }
 
-func Save[M Model](model M, db *gorm.DB) error {
-	result := db.Save(&model)
+func Create[M Model](model *M, db *gorm.DB) error {
+	result := db.Create(model)
 	return result.Error
 }
 

@@ -45,7 +45,7 @@ func UserCreate(c flamego.Context, t template.Template, d template.Data, user m.
 		validationError(c, errs)
 		return
 	}
-	m.Save(user, db)
+	m.Create(&user, db)
 	d["User"] = user
 	t.HTML(http.StatusCreated, "user/partial")
 }

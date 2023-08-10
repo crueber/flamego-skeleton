@@ -3,7 +3,7 @@
       {{if .ID}}
       action="/user/{{.ID}}" hx-put="/user/{{.ID}}" hx-target="#user" hx-swap="innerHTML"
       {{else}}
-      action="/user" hx-post="/user" hx-target="#userlist"  hx-swap="afterbegin" hx-on::after-request="this.reset(); this.children[0].focus()"
+      action="/user" hx-post="/user" hx-target="#userlist"  hx-swap="beforeend" hx-on::after-request="this.reset(); this.children[0].focus()"
       {{end}}
     >
   <input name="name" type="text" placeholder="name"{{if .Name}} value="{{.Name}}"{{end}} />
