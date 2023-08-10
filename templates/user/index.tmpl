@@ -6,6 +6,18 @@
 <h3>Peeps</h3>
 <p>
   <table class="table table-sm">
+    <tbody id="userlist">
+      <tr><td colspan="0">
+        <div class="text-center" 
+            hx-get="/users.partial?page=1" 
+            hx-target="closest tr" 
+            hx-swap="outerHTML" 
+            hx-trigger="load">Loading...</div>
+      </td></tr>
+    </tbody>
+  </table>
+
+  <!-- <table class="table table-sm">
   <tbody id="userlist">
     {{if len .Users}}
       {{range .Users}}
@@ -14,7 +26,7 @@
     {{end}}
   </tbody>
   </table>
-  {{template "include/paginate" .Pagination}}
+  {{template "include/paginate" .Pagination}} -->
 </p>
 
 {{template "include/footer" .}}

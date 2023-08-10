@@ -32,6 +32,7 @@ func main() {
 	f.Put("/user/{id}", binding.Form(m.User{}), r.UserUpdate)
 	f.Post("/user/{id}", binding.Form(m.User{}), r.UserUpdate)
 	f.Get("/users", r.UserIndex)
+	f.Get("/users.partial", r.UserIndexPartial)
 	f.Get("/user/{id}", r.UserRead)
 	f.Delete("/user/{id}", r.UserDelete)
 	f.Get("/user/{id}/delete", r.UserDelete)

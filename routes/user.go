@@ -18,6 +18,12 @@ func UserIndex(c flamego.Context, t template.Template, d template.Data, db *gorm
 	t.HTML(http.StatusOK, "user/index")
 }
 
+func UserIndexPartial(c flamego.Context, t template.Template, d template.Data, db *gorm.DB) {
+	paging := m.SetPagination(c.QueryInt64("page"), c.QueryInt("perpage"), "/users.partial")
+	d["Users"], d["Pagination"] = m.PaginatedList[m.User](paging, db)
+	t.HTML(http.StatusOK, "user/index-partial")
+}
+
 func UserRead(c flamego.Context, t template.Template, d template.Data, db *gorm.DB) {
 	d["User"] = m.Get[m.User](c.ParamInt("id"), db)
 	t.HTML(http.StatusOK, "user/read")
@@ -35,7 +41,7 @@ func UserUpdate(c flamego.Context, t template.Template, d template.Data, userUpd
 	user := Update[m.User](c.ParamInt("id"), updates, db)
 	d["User"] = user
 	if c.Request().Method == http.MethodPut {
-		t.HTML(http.StatusAccepted, "user/partial")
+		t.HTML(http.StatusAccepted, "user/read-partial")
 	} else {
 		c.Redirect(fmt.Sprintf("%s%d", "/user/", user.ID), http.StatusFound)
 	}
@@ -48,7 +54,7 @@ func UserCreate(c flamego.Context, t template.Template, d template.Data, user m.
 	}
 	m.Create(&user, db)
 	d["User"] = user
-	t.HTML(http.StatusCreated, "user/partial")
+	t.HTML(http.StatusCreated, "user/read-partial")
 }
 
 func UserDelete(c flamego.Context, db *gorm.DB) {
