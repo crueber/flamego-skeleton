@@ -40,6 +40,10 @@ func BuildURI(p m.Pagination) string {
 		uri.WriteString("page=")
 		uri.WriteString(strconv.FormatInt(p.NextPage, 10))
 	}
+	if p.PerPage != 5 && p.PerPage != 0 {
+		uri.WriteString("&perpage=")
+		uri.WriteString(strconv.Itoa(p.PerPage))
+	}
 	if p.Search != "" {
 		uri.WriteString("&search=")
 		uri.WriteString(p.Search)

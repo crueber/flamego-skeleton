@@ -4,9 +4,19 @@
 {{template "user/fragment-form"}}
 
 <h3>Peeps</h3>
-<form>
+<form hx-include="[name]" hx-target="#userlist">
   <input name="page" value="1" type="hidden" />
-  <input name="search" hx-get="/users.partial" hx-trigger="keyup changed delay:.5s" hx-target="#userlist" />
+  <div class="row">
+    <div class="col">
+      <input type="text" class="form-control" placeholder="Search..." name="search" hx-trigger="keyup changed delay:.5s" hx-get="/users.partial"/>
+    </div>
+    <div class="col">
+      <select class="form-select" name="perpage" hx-trigger="change" hx-get="/users.partial">
+        <option value="5" selected>5</option>
+        <option value="10">10</option>
+      </select>
+    </div>
+  </div>
 </form>
 <p>
   <table class="table table-sm">
