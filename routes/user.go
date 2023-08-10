@@ -27,10 +27,11 @@ func UserUpdate(c flamego.Context, t template.Template, d template.Data, userUpd
 		validationError(c, errs)
 		return
 	}
-	user := m.Get[m.User](c.ParamInt("id"), db)
-	user.Name = userUpdates.Name
-	user.Email = userUpdates.Email
-	m.Save(user, db)
+	updates := map[string]interface{}{
+		"name":  userUpdates.Name,
+		"email": userUpdates.Email,
+	}
+	user := Update[m.User](c.ParamInt("id"), updates, db)
 	d["User"] = user
 	if c.Request().Method == http.MethodPut {
 		t.HTML(http.StatusAccepted, "user/partial")
@@ -47,7 +48,6 @@ func UserCreate(c flamego.Context, t template.Template, d template.Data, user m.
 	m.Save(user, db)
 	d["User"] = user
 	t.HTML(http.StatusCreated, "user/partial")
-	// c.Redirect(fmt.Sprintf("%s%d", "/user/", user.ID), http.StatusFound)
 }
 
 func UserDelete(c flamego.Context, db *gorm.DB) {
@@ -56,8 +56,6 @@ func UserDelete(c flamego.Context, db *gorm.DB) {
 	if c.Request().Method == http.MethodGet {
 		c.Redirect("/users", http.StatusFound)
 	} else {
-		w := c.ResponseWriter()
-		w.WriteHeader(http.StatusOK)
-		w.Write([]byte{})
+		StatusOK(c)
 	}
 }

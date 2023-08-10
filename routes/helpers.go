@@ -7,7 +7,21 @@ import (
 	"github.com/flamego/binding"
 	"github.com/flamego/flamego"
 	"github.com/flamego/validator"
+	"gorm.io/gorm"
+
+	m "fgo-test/models"
 )
+
+func StatusOK(c flamego.Context) {
+	w := c.ResponseWriter()
+	w.WriteHeader(http.StatusOK)
+	w.Write([]byte{})
+}
+
+func Update[M m.Model](id int, updates map[string]interface{}, db *gorm.DB) M {
+	db.Model(&M{ID: uint(id)}).Updates(updates)
+	return m.Get[M](id, db)
+}
 
 func validationError(c flamego.Context, errs binding.Errors) {
 	var err error
