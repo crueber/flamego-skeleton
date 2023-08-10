@@ -14,17 +14,7 @@
     {{end}}
   </tbody>
   </table>
-  {{with .Pagination}}
-    {{if gt .CurrentPage 1 }}
-    <a href="/users?page={{Add .CurrentPage -1}}">&lt;&lt; Previous</a>
-    &nbsp;&nbsp;&nbsp;
-    {{end}}
-    (Page {{ .CurrentPage }} of {{ .TotalPages }})
-    {{if lt .CurrentPage .TotalPages}}
-    &nbsp;&nbsp;&nbsp; 
-    <a href="/users?page={{Add .CurrentPage 1}}">Next &gt;&gt;</a>
-    {{end}} 
-  {{end}}
+  {{template "include/paginate" .Pagination}}
 </p>
 
 {{template "include/footer" .}}

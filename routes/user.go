@@ -13,7 +13,7 @@ import (
 )
 
 func UserIndex(c flamego.Context, t template.Template, d template.Data, db *gorm.DB) {
-	paging := m.SetPagination(c.QueryInt64("page"), c.QueryInt("perpage"))
+	paging := m.SetPagination(c.QueryInt64("page"), c.QueryInt("perpage"), "/users")
 	d["Users"], d["Pagination"] = m.PaginatedList[m.User](paging, db)
 	t.HTML(http.StatusOK, "user/index")
 }

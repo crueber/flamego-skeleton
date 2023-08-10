@@ -15,9 +15,9 @@ func ListAll[M Model](db *gorm.DB) []M {
 func PaginatedList[M Model](paging Pagination, db *gorm.DB) ([]M, Pagination) {
 	var hydrated []M
 	var count int64
-	db.Limit(paging.PerPage).Offset(int((paging.CurrentPage - 1) * int64(paging.PerPage))).Find(&hydrated)
+	db.Limit(paging.PerPage).Offset(paging.Offset()).Find(&hydrated)
 	db.Model(&M{}).Count(&count)
-	paging.TotalPages = (count / int64(paging.PerPage)) + 1
+	paging.SetTotal(count)
 	return hydrated, paging
 }
 

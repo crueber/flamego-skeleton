@@ -1,0 +1,21 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col text-end">
+            {{if .PrevPage }}
+            <a href="{{.URI}}?page={{.PrevPage}}">&lt;&lt; Previous</a>
+            {{end}}
+            &nbsp;&nbsp;&nbsp;
+        </div>
+        <div class="col text-center">
+            (Page {{ .CurrentPage }} of {{ .TotalPages }})
+        </div>
+        <div class="col text-start">
+            &nbsp;&nbsp;&nbsp;
+            {{if .NextPage}}
+            <a href="{{.URI}}?page={{.NextPage}}">Next &gt;&gt;</a>
+            {{end}} 
+        </div>
+    </div>    
+</div>
+
+
