@@ -6,7 +6,7 @@
 
     <tr><td colspan="100" class="text-center border-bottom-0" >
         {{if .Pagination.NextPage}}
-        <div hx-get="{{BuildURI .Pagination}}" 
+        <div hx-get="{{BuildPagingURI .Pagination.URI .Pagination.NextPage .Pagination.PerPage .Pagination.Search}}" 
              hx-target="closest tr" 
              hx-swap="outerHTML" 
              hx-trigger="revealed">Loading...</div>

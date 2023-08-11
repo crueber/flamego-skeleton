@@ -3,10 +3,10 @@
       {{if .ID}}
       action="/user/{{.ID}}" hx-put="/user/{{.ID}}" hx-target="#user" hx-swap="innerHTML"
       {{else}}
-      action="/user" hx-post="/user" hx-target="#userlist"  hx-swap="beforeend" hx-on::after-request="this.reset(); this.children[0].focus()"
+      action="/user" hx-post="/user" hx-target="#userlist"  hx-swap="afterbegin" hx-on::after-request="this.reset(); this.children[0].focus()"
       {{end}}
     >
-  <input name="name" type="text" placeholder="name"{{if .Name}} value="{{.Name}}"{{end}} />
-  <input name="email" type="text" placeholder="email"{{if .Email}} value="{{.Email}}"{{end}} />
-  <input type="submit" />
+  <input name="name" tabindex="10" type="text" placeholder="name"{{if .Name}} value="{{.Name}}"{{end}} />
+  <input name="email" tabindex="11" type="text" placeholder="email"{{if .Email}} value="{{.Email}}"{{end}} />
+  <input type="submit" tabindex="12" />
 </form>

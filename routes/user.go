@@ -23,7 +23,7 @@ func UserSearchScope(search string) func(db *gorm.DB) *gorm.DB {
 }
 
 func UserIndex(c flamego.Context, t template.Template, d template.Data, db *gorm.DB) {
-	paging := m.SetPagination(c.QueryInt64("page"), c.QueryInt("perpage"), c.QueryTrim("search"), UserSearchScope, "/users")
+	paging := m.SetPagination(c.QueryInt64("page"), c.QueryInt("perpage"), c.QueryTrim("search"), UserSearchScope, "/users.partial")
 	d["Users"], d["Pagination"] = m.PaginatedList[m.User](paging, db)
 	t.HTML(http.StatusOK, "user/index")
 }

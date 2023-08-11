@@ -7,16 +7,14 @@ import (
 	"time"
 
 	"github.com/dustin/go-humanize"
-
-	m "fgo-test/models"
 )
 
 func Helpers() template.FuncMap {
 	return template.FuncMap{
-		"RelativeTime": RelativeTime,
-		"DateOnly":     DateOnly,
-		"Add":          Add,
-		"BuildURI":     BuildURI,
+		"RelativeTime":   RelativeTime,
+		"DateOnly":       DateOnly,
+		"Add":            Add,
+		"BuildPagingURI": BuildPagingURI,
 	}
 }
 
@@ -32,21 +30,21 @@ func Add(n int64, a int64) int64 {
 	return n + a
 }
 
-func BuildURI(p m.Pagination) string {
+func BuildPagingURI(baseuri string, page int64, perpage int, search string) string {
 	var uri strings.Builder
-	uri.WriteString(p.URI)
+	uri.WriteString(baseuri)
 	uri.WriteString("?")
-	if p.NextPage != 0 {
+	if page != 0 {
 		uri.WriteString("page=")
-		uri.WriteString(strconv.FormatInt(p.NextPage, 10))
+		uri.WriteString(strconv.FormatInt(page, 10))
 	}
-	if p.PerPage != 5 && p.PerPage != 0 {
+	if perpage != 5 && perpage != 0 {
 		uri.WriteString("&perpage=")
-		uri.WriteString(strconv.Itoa(p.PerPage))
+		uri.WriteString(strconv.Itoa(perpage))
 	}
-	if p.Search != "" {
+	if search != "" {
 		uri.WriteString("&search=")
-		uri.WriteString(p.Search)
+		uri.WriteString(search)
 	}
 	return uri.String()
 }
