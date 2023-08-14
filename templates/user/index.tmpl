@@ -3,22 +3,22 @@
 <h3>Create new user:</h3>
 {{template "user/fragment-form"}}
 
-<h3>Peeps</h3>
 <form method="get" action="/users" onsubmit="event.preventDefault(); return false;">
   <div class="row" hx-include="[name]" hx-target="#userlist">
     <input name="page" value="1" type="hidden" />
+    <div class="col">
+      <h3>Peeps</h3>
+    </div>
     <div class="col">
       <input id="searchfield" type="text" class="form-control" placeholder="Search..." name="search" tabindex="1"
              hx-trigger="keyup changed delay:500ms" 
              hx-get="/users.partial" 
              {{if .Pagination.Search}} value="{{.Pagination.Search}}"{{end}} />
-    </div>
-    <div class="col">
-      <select class="form-select" name="perpage" hx-trigger="change" hx-get="/users.partial" tabindex="2">
+      <!-- <select class="form-select" name="perpage" hx-trigger="change" hx-get="/users.partial" tabindex="2">
         <option value="5"{{if eq .Pagination.PerPage 5}} selected{{end}}>5</option>
         <option value="10"{{if eq .Pagination.PerPage 10}} selected{{end}}>10</option>
         <option value="20"{{if eq .Pagination.PerPage 20}} selected{{end}}>20</option>
-      </select>
+      </select> -->
     </div>
   </div>
 </form>
@@ -26,11 +26,13 @@
   <table class="table table-sm">
     <tbody id="userlist">
       <tr><td colspan="0">
+        {{with .Pagination}}
         <div class="text-center" 
-            hx-get="{{BuildPagingURI .Pagination.URI .Pagination.CurrentPage .Pagination.PerPage .Pagination.Search}}" 
+            hx-get="{{BuildPagingURI .URI .CurrentPage .PerPage .Search}}" 
             hx-target="closest tr" 
             hx-swap="outerHTML" 
             hx-trigger="load">Loading...</div>
+        {{end}}
       </td></tr>
     </tbody>
   </table>
@@ -48,7 +50,7 @@
 </p>
 
 <script type="text/javascript">
-  document.body.addEventListener('htmx:load', function(evt) { document.getElementById("searchfield").focus(); });
+  document.body.addEventListener('htmx:load', function(evt) { document.getElementById("searchfield").focus(); }, { once: true });
 </script>
 
 {{template "include/footer" .}}

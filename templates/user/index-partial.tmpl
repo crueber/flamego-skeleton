@@ -5,13 +5,15 @@
     {{end}}
 
     <tr><td colspan="100" class="text-center border-bottom-0" >
-        {{if .Pagination.NextPage}}
-        <div hx-get="{{BuildPagingURI .Pagination.URI .Pagination.NextPage .Pagination.PerPage .Pagination.Search}}" 
-             hx-target="closest tr" 
-             hx-swap="outerHTML" 
-             hx-trigger="revealed">Loading...</div>
+        {{with .Pagination}}
+        {{if .NextPage}}
+            <div hx-get="{{BuildPagingURI .URI .NextPage .PerPage .Search}}" 
+                hx-target="closest tr" 
+                hx-swap="outerHTML" 
+                hx-trigger="revealed">Loading...</div>
         {{else}}
-        No more results.
+            No more results.
+        {{end}}
         {{end}}
     </td></tr>
 {{else}}
